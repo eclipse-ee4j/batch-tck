@@ -22,7 +22,7 @@ import java.util.ServiceLoader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 
 import com.ibm.jbatch.tck.spi.JobExecutionWaiterFactory;
 

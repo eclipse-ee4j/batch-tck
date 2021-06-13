@@ -19,23 +19,22 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
-import java.util.Properties;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class SplitFlowTransitionLoopTests {
+public class SplitFlowTransitionLoopTests extends BaseJUnit5Test {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /**
      * @throws Exception
@@ -81,7 +80,6 @@ public class SplitFlowTransitionLoopTests {
      * </split>
      */
     @Test
-    @org.junit.Test
     public void testSplitFlowTransitionLoopSplitFlowSplit() throws Exception {
 
         String METHOD = "testSplitFlowTransitionLoopSplitFlowSplit";
@@ -104,30 +102,13 @@ public class SplitFlowTransitionLoopTests {
         throw e;
     }
 
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

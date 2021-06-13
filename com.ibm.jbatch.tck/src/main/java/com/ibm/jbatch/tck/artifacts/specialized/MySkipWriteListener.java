@@ -26,7 +26,7 @@ import jakarta.batch.runtime.context.JobContext;
 import jakarta.batch.runtime.context.StepContext;
 import jakarta.inject.Inject;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.ReadRecord;
 import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;

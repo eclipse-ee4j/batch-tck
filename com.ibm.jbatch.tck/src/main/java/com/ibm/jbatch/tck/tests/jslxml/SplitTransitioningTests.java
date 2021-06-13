@@ -19,26 +19,25 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class SplitTransitioningTests {
+public class SplitTransitioningTests extends BaseJUnit5Test {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /**
      * @throws JobStartException
@@ -53,7 +52,6 @@ public class SplitTransitioningTests {
      * 4. verify that the split indeed transitioned to the step
      */
     @Test
-    @org.junit.Test
     public void testSplitTransitionToStep() throws Exception {
 
         String METHOD = "testSplitTransitionToStep";
@@ -107,7 +105,6 @@ public class SplitTransitioningTests {
      * </step>
      */
     @Test
-    @org.junit.Test
     public void testSplitTransitionToStepOutOfScope() throws Exception {
 
         String METHOD = "testSplitTransitionToStepOutOfScope";
@@ -150,7 +147,6 @@ public class SplitTransitioningTests {
      * 4. compare that the exit status set by the decider matches that of the job
      */
     @Test
-    @org.junit.Test
     public void testSplitTransitionToDecision() throws Exception {
 
         String METHOD = "testSplitTransitionToDecision";
@@ -181,30 +177,13 @@ public class SplitTransitioningTests {
         throw e;
     }
 
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

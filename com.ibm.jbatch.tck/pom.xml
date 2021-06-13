@@ -33,13 +33,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -79,24 +74,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <executions>
-                        <execution>
-                            <id>filter-build.xml</id>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <phase>none</phase>
-                            <configuration>
-                                <target>
-                                    <copy file="${project.basedir}/testng/build.xml" tofile="${project.basedir}/testng/filtered.build.xml" filtering="true" overwrite="true">
-                                        <filterset>
-                                            <filter token="project.version" value="${project.version}" />
-                                            <filter token="version.org.testng.testng" value="${version.org.testng.testng}" />
-                                            <filter token="version.com.beust.jcommander" value="${version.com.beust.jcommander}" />
-                                        </filterset>
-                                    </copy>
-                                </target>
-                            </configuration>
-                        </execution>
                         <!-- By failing when the newly-generated batch.xml changes, we force someone to review
                              the changes.   We purposely don't want to make it too easy to introduce a change here,
                              since this will ultimately affect the pass/failing of implementations' runs against the TCK.
@@ -203,7 +180,6 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>filter-build.xml</id>
                         <phase>generate-resources</phase>
                     </execution>
                 </executions>

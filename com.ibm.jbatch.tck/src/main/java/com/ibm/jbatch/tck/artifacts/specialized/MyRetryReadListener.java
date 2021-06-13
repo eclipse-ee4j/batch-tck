@@ -24,7 +24,7 @@ import jakarta.batch.api.chunk.listener.RetryReadListener;
 import jakarta.batch.runtime.context.JobContext;
 import jakarta.inject.Inject;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 
 @jakarta.inject.Named("myRetryReadListener")
 public class MyRetryReadListener implements RetryReadListener {

@@ -20,21 +20,21 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.util.Properties;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.BeforeClass;
-import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
-public class StopOrFailOnExitStatusWithRestartTests {
+public class StopOrFailOnExitStatusWithRestartTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp;
 
@@ -42,22 +42,9 @@ public class StopOrFailOnExitStatusWithRestartTests {
         Reporter.log("Begin test method: " + str + "<p>");
     }
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    public static void cleanup() throws Exception {
     }
 
     /*
@@ -66,7 +53,6 @@ public class StopOrFailOnExitStatusWithRestartTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithUserStopAndRestart() throws Exception {
 
         String METHOD = "testInvokeJobWithUserStopAndRestart";
@@ -138,7 +124,6 @@ public class StopOrFailOnExitStatusWithRestartTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithUncaughtExceptionFailAndRestart() throws Exception {
         String METHOD = "testInvokeJobWithUncaughtExceptionFailAndRestart";
         begin(METHOD);

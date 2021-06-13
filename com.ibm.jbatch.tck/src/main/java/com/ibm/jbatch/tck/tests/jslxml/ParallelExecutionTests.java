@@ -21,53 +21,33 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
-import org.junit.BeforeClass;
-import org.testng.Reporter;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
 
-public class ParallelExecutionTests {
-
-    private final static Logger logger = Logger.getLogger(ParallelExecutionTests.class.getName());
+public class ParallelExecutionTests extends BaseJUnit5Test {
 
     private static final String TIME_TO_SLEEP_BEFORE_ISSUING_STOP = "1900";
 
     private static JobOperatorBridge jobOp = null;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
-
-    @AfterClass
-    public static void cleanup() throws Exception {
-    }
-
 
     private void begin(String str) {
         Reporter.log("Begin test method: " + str + "<p>");
@@ -79,7 +59,6 @@ public class ParallelExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithOnePartitionedStep() throws Exception {
         String METHOD = "testInvokeJobWithOnePartitionedStep";
         begin(METHOD);
@@ -103,7 +82,6 @@ public class ParallelExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithOnePartitionedStepExitStatus() throws Exception {
         String METHOD = "testInvokeJobWithOnePartitionedStepExitStatus";
         begin(METHOD);
@@ -149,7 +127,6 @@ public class ParallelExecutionTests {
      * instead of running forever.
      */
     @Test
-    @org.junit.Test
     public void testStopRunningPartitionedStep() throws Exception {
         String METHOD = "testStopRunningPartitionedStep";
         begin(METHOD);
@@ -194,7 +171,6 @@ public class ParallelExecutionTests {
      * restart and run to completion.
      */
     @Test
-    @org.junit.Test()
     public void testStopRestartRunningPartitionedStep() throws Exception {
         String METHOD = "testStopRestartRunningPartitionedStep";
         begin(METHOD);
@@ -243,7 +219,6 @@ public class ParallelExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobSimpleSplit() throws Exception {
         String METHOD = "testInvokeJobSimpleSplit";
         begin(METHOD);
@@ -276,7 +251,6 @@ public class ParallelExecutionTests {
      * many times the step has been run. If the data is not persisted
      */
     @Test
-    @org.junit.Test
     public void testPartitionedPlanCollectorAnalyzerReducerComplete() throws Exception {
         String METHOD = "testPartitionedPlanCollectorAnalyzerReducerComplete";
         begin(METHOD);
@@ -317,7 +291,6 @@ public class ParallelExecutionTests {
      * through the collector, analyzer, and finally the reducer.
      */
     @Test
-    @org.junit.Test
     public void testZeroBasedPartitionedPlanCollectorAnalyzerReducerRollback() throws Exception {
         String METHOD = "testZeroBasedPartitionedPlanCollectorAnalyzerReducerRollback";
         begin(METHOD);
@@ -366,7 +339,6 @@ public class ParallelExecutionTests {
      * since it does not append any data to the exit status.
      */
     @Test
-    @org.junit.Test
     public void testPartitionedCollectorAnalyzerReducerChunkRestartItemCount10() throws Exception {
 
         String METHOD = "testPartitionedCollectorAnalyzerReducerChunkRestartItemCount10";
@@ -453,7 +425,6 @@ public class ParallelExecutionTests {
      * the failed partition.
      */
     @Test
-    @org.junit.Test
     public void testPartitionedMapperOverrideFalseOnRestart() throws Exception {
         String METHOD = "testPartitionedMapperOverrideFalse";
         begin(METHOD);
@@ -506,7 +477,6 @@ public class ParallelExecutionTests {
      * used.
      */
     @Test
-    @org.junit.Test
     public void testPartitionedMapperOverrideTrueDiffPartitionNumOnRestart() throws Exception {
         String METHOD = "testPartitionedMapperOverrideTrueDiffPartitionNumOnRestart";
         begin(METHOD);
@@ -559,7 +529,6 @@ public class ParallelExecutionTests {
      * partitions should be restarted anyway, even though some had completed previously.
      */
     @Test
-    @org.junit.Test
     public void testPartitionedMapperOverrideTrueSamePartitionNumOnRestart() throws Exception {
         String METHOD = "testPartitionedMapperOverrideTrueSamePartitionNumOnRestart";
         begin(METHOD);

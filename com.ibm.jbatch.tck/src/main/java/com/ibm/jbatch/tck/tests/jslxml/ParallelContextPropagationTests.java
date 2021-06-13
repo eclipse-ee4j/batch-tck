@@ -21,22 +21,21 @@ package com.ibm.jbatch.tck.tests.jslxml;
 import static com.ibm.jbatch.tck.utils.AssertionUtils.*;
 
 import java.util.List;
-import java.util.Properties;
 
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.ann.*;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 
-public class ParallelContextPropagationTests {
+public class ParallelContextPropagationTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;
 
@@ -59,7 +58,6 @@ public class ParallelContextPropagationTests {
             notes = {"There is no particular place in the spec that says that partitions share the same values for the getters tested as the top-level JobContext/StepContext."}
     )
     @Test
-    @org.junit.Test
     public void testPartitionContextPropagation() throws Exception {
 
         JobExecution je = jobOp.startJobAndWaitForResult("partitionCtxPropagation", null);
@@ -122,7 +120,6 @@ public class ParallelContextPropagationTests {
             notes = {"There is no particular place in the spec that says that split-flows share the same values for the getters tested as the top-level JobContext/StepContext."}
     )
     @Test
-    @org.junit.Test
     public void testSplitFlowContextPropagation() throws Exception {
 
         JobExecution je = jobOp.startJobAndWaitForResult("splitFlowCtxPropagation", null);
@@ -158,30 +155,13 @@ public class ParallelContextPropagationTests {
         throw e;
     }
 
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-        jobOp = null;
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

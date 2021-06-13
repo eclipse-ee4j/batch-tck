@@ -35,38 +35,22 @@ import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.artifacts.reusable.MyBatchletImpl;
 import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentUserData;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.BeforeClass;
-import org.testng.Reporter;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class StepExecutionTests {
+public class StepExecutionTests extends BaseJUnit5Test {
 
     private final static Logger logger = Logger.getLogger(StepExecutionTests.class.getName());
 
     private static JobOperatorBridge jobOp;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    @AfterClass
-    public static void cleanup() throws Exception {
     }
 
     private void begin(String str) {
@@ -79,7 +63,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testOneStepExecutionStatus() throws Exception {
 
         String METHOD = "testOneStepExecutionStatus";
@@ -117,7 +100,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testFourStepExecutionStatus() throws Exception {
 
         String METHOD = "testFourStepExecutionStatus";
@@ -157,7 +139,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testFailedStepExecutionStatus() throws Exception {
         String METHOD = "testFailedStepExecutionStatus";
         begin(METHOD);
@@ -192,7 +173,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testStoppedStepExecutionStatus() throws Exception {
         String METHOD = "testStoppedStepExecutionStatus";
         begin(METHOD);
@@ -225,7 +205,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testPersistedStepData() throws Exception {
         String METHOD = "testPersistedStepData";
         begin(METHOD);
@@ -280,7 +259,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testStepExecutionExitStatus() throws Exception {
         String METHOD = "testStepExecutionExitStatus";
         begin(METHOD);
@@ -314,7 +292,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testStepInFlowStepExecution() throws Exception {
         String METHOD = "testStepInFlowStepExecution";
         begin(METHOD);
@@ -351,7 +328,6 @@ public class StepExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testStepInFlowInSplitStepExecution() throws Exception {
         String METHOD = "testStepInFlowInSplitStepExecution";
         begin(METHOD);

@@ -32,40 +32,21 @@ import jakarta.batch.runtime.StepExecution;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.testng.Reporter;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-// Since we don't want to run these in SE, and are only really running TestNG in EE, we
-// can safely do a JUnit @Ignore without missing anything.
-@Ignore
+@Tag("ee")
 public class TransactionTests {
 
     private final static Logger logger = Logger.getLogger(TransactionTests.class.getName());
 
     private static JobOperatorBridge jobOp;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    @AfterClass
-    public static void cleanup() throws Exception {
     }
 
     private void begin(String str) {
@@ -85,7 +66,6 @@ public class TransactionTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testTranRollbackRetryReadSkipRead() throws Exception {
         String METHOD = "testTranRollbackRetryReadSkipRead";
         begin(METHOD);
@@ -133,7 +113,6 @@ public class TransactionTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testTranRollbackRetryProcessSkipProcess() throws Exception {
         String METHOD = "testTranRollbackRetryProcessSkipProcess";
         begin(METHOD);
@@ -181,7 +160,6 @@ public class TransactionTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testTranRollbackRetryWriteSkipWrite() throws Exception {
         String METHOD = "testTranRollbackRetryWriteSkipWrite";
         begin(METHOD);
@@ -223,7 +201,6 @@ public class TransactionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testGlobalTranNoExceptions() throws Exception {
         String METHOD = "testGlobalTranNoExceptions";
         begin(METHOD);
@@ -277,7 +254,6 @@ public class TransactionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testGlobalTranForcedExceptionWithRollback() throws Exception {
         String METHOD = "testGlobalTranForcedExceptionWithRollback";
         begin(METHOD);
@@ -329,7 +305,6 @@ public class TransactionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testGlobalTranForcedExceptionCheckpointRestart() throws Exception {
         String METHOD = "testGlobalTranForcedExceptionCheckpointRestart";
         begin(METHOD);
@@ -399,7 +374,6 @@ public class TransactionTests {
      *                 normally.
      */
     @Test
-    @org.junit.Test
     public void testGlobalTranNoDelayLongTimeout() throws Exception {
         String METHOD = "testGlobalTranNoDelayLongTimeout";
         begin(METHOD);
@@ -469,7 +443,6 @@ public class TransactionTests {
      *                 to hint at it and possibly catch an implementation doing something completely off-base.
      */
     @Test
-    @org.junit.Test
     public void testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutSteps() throws Exception {
         String METHOD = "testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutSteps";
         begin(METHOD);
@@ -543,7 +516,6 @@ public class TransactionTests {
      *                 The long timeouts are longer than the "long" delay, so steps 2, 3 complete successfully.
      */
     @Test
-    @org.junit.Test
     public void testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutStepsCustomCheckpointAlgorithm() throws Exception {
         String METHOD = "testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutStepsCustomCheckpointAlgorithm";
         begin(METHOD);

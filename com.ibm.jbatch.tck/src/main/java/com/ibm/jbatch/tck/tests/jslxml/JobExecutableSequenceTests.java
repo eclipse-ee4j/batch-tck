@@ -19,26 +19,25 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class JobExecutableSequenceTests {
+public class JobExecutableSequenceTests extends BaseJUnit5Test {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /**
      * @throws JobStartException
@@ -52,7 +51,6 @@ public class JobExecutableSequenceTests {
      * 3. job should fail because it shouldn't be able to transition to unknown
      */
     @Test
-    @org.junit.Test
     public void testJobExecutableSequenceToUnknown() throws Exception {
 
         String METHOD = "testJobExecutableSequenceToUnknown";
@@ -87,30 +85,13 @@ public class JobExecutableSequenceTests {
         throw e;
     }
 
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

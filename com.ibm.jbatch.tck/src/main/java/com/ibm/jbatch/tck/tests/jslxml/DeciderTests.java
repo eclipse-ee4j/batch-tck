@@ -28,42 +28,25 @@ import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.BeforeClass;
-import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.artifacts.common.StatusConstants;
 import com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsBatchlet;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class DeciderTests implements StatusConstants {
+public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
     private final static Logger logger = Logger.getLogger(DeciderTests.class.getName());
     private static JobOperatorBridge jobOp = null;
 
     private final static String FORCE_STOP_EXITSTATUS = "STEP_COMPLETE_BUT_FORCE_JOB_STOPPED_STATUS";
     private final static String FORCE_FAIL_EXITSTATUS = "STEP_COMPLETE_BUT_FORCE_JOB_FAILED_STATUS";
 
-
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
     }
 
     /*
@@ -94,7 +77,6 @@ public class DeciderTests implements StatusConstants {
      *
      */
     @Test
-    @org.junit.Test
     public void testDeciderEndNormal() throws Exception {
 
         String METHOD = "testDeciderEndNormal";
@@ -140,7 +122,6 @@ public class DeciderTests implements StatusConstants {
      * @test_Strategy: see testDeciderEndNormal
      */
     @Test
-    @org.junit.Test
     public void testDeciderEndSpecial() throws Exception {
         String METHOD = "testDeciderEndSpecial";
 
@@ -178,7 +159,6 @@ public class DeciderTests implements StatusConstants {
      * @test_Strategy: see testDeciderEndNormal
      */
     @Test
-    @org.junit.Test
     public void testDeciderStopNormal() throws Exception {
         String METHOD = " testDeciderStopNormal";
 
@@ -217,7 +197,6 @@ public class DeciderTests implements StatusConstants {
      * @test_Strategy: see testDeciderEndNormal
      */
     @Test
-    @org.junit.Test
     public void testDeciderStopSpecial() throws Exception {
         String METHOD = "testDeciderStopSpecial";
 
@@ -255,7 +234,6 @@ public class DeciderTests implements StatusConstants {
      * @test_Strategy: see testDeciderEndNormal
      */
     @Test
-    @org.junit.Test
     public void testDeciderFailNormal() throws Exception {
 
         String METHOD = "testDeciderFailNormal";
@@ -294,7 +272,6 @@ public class DeciderTests implements StatusConstants {
      * @test_Strategy: see testDeciderEndNormal
      */
     @Test
-    @org.junit.Test
     public void testDeciderFailSpecial() throws Exception {
         String METHOD = "testDeciderFailSpecial";
 
@@ -331,7 +308,6 @@ public class DeciderTests implements StatusConstants {
      * @test_Strategy: see testDeciderEndNormal
      */
     @Test
-    @org.junit.Test
     public void testDeciderNextNormal() throws Exception {
         String METHOD = "testDeciderNextNormal";
 
@@ -370,7 +346,6 @@ public class DeciderTests implements StatusConstants {
      * @test_Strategy: see testDeciderEndNormal
      */
     @Test
-    @org.junit.Test
     public void testDeciderNextSpecial() throws Exception {
         String METHOD = "testDeciderNextSpecial";
 
@@ -413,7 +388,6 @@ public class DeciderTests implements StatusConstants {
      *   confirm that the exit status is set on the JobContext directly, but this is the intent behind the test method name.
      */
     @Test
-    @org.junit.Test
     public void testDeciderExitStatusIsSetOnJobContext() throws Exception {
 
         String METHOD = "testDeciderExitStatusIsSetOnJobContext";
@@ -450,7 +424,6 @@ public class DeciderTests implements StatusConstants {
      *  or BatchStatus of FAILED.
      */
     @Test
-    @org.junit.Test
     public void testDeciderCannotbeFirstElementOnStart() throws Exception {
 
         String METHOD = "testDeciderCannotbeFirstElementOnStart";
@@ -493,7 +466,6 @@ public class DeciderTests implements StatusConstants {
      *                     been performed.
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromStepAndAllowRestart() throws Exception {
         String METHOD = "testDeciderTransitionFromStepAndAllowRestart";
 
@@ -548,7 +520,6 @@ public class DeciderTests implements StatusConstants {
      *                  3. A decision within a flow is configured to stop (based on exit status matching against a <stop> element).
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromStepWithinFlowAndAllowRestart() throws Exception {
 
         String METHOD = "testDeciderTransitionFromStepWithinFlowAndAllowRestart";
@@ -601,7 +572,6 @@ public class DeciderTests implements StatusConstants {
      *                     been performed.
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromFlowAndAllowRestart() throws Exception {
 
         String METHOD = "testDeciderTransitionFromFlowAndAllowRestart";
@@ -657,7 +627,6 @@ public class DeciderTests implements StatusConstants {
      *                     tightened.  We could go further to assert that the full list of StepExecution(s) is what we'd expect.
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromSplitAndAllowRestart() throws Exception {
 
         String METHOD = "testDeciderTransitionFromSplitAndAllowRestart";
@@ -712,7 +681,6 @@ public class DeciderTests implements StatusConstants {
      *                  been performed.
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromStepAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromStepAndAllowRestartFalse";
@@ -770,7 +738,6 @@ public class DeciderTests implements StatusConstants {
      *                  3. A decision within a flow is configured to stop (based on exit status matching against a <stop> element).
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromStepWithinFlowAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromStepWithinFlowAndAllowRestartFalse";
@@ -827,7 +794,6 @@ public class DeciderTests implements StatusConstants {
      *                     been performed.
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromFlowAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromFlowAndAllowRestartFalse";
@@ -887,7 +853,6 @@ public class DeciderTests implements StatusConstants {
      *                     tightened.  We could go further to assert that the full list of StepExecution(s) is what we'd expect.
      */
     @Test
-    @org.junit.Test
     public void testDeciderTransitionFromSplitAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromSplitAndAllowRestartFalse";

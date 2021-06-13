@@ -19,6 +19,7 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,15 +34,14 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-public class JobAttributeRestartTests {
+public class JobAttributeRestartTests extends BaseJUnit5Test {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     private long TIMEOUT = 5000L;
 
@@ -59,7 +59,6 @@ public class JobAttributeRestartTests {
      * @test_Strategy: set restartable true should allow job to restart
      */
     @Test
-    @org.junit.Test
     public void testJobAttributeRestartableTrue() throws Exception {
 
         String METHOD = "testJobAttributeRestartableTrue";
@@ -95,30 +94,13 @@ public class JobAttributeRestartTests {
         throw e;
     }
 
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 

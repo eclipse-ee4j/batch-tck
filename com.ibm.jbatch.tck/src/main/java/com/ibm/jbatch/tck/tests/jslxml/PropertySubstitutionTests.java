@@ -19,6 +19,7 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.io.File;
 import java.util.Properties;
@@ -27,38 +28,23 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.BeforeClass;
-import org.testng.Reporter;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class PropertySubstitutionTests {
+public class PropertySubstitutionTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
 
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterMethod
-    public static void tearDown() throws Exception {
-    }
-
-    @AfterMethod
-    public void cleanup() throws Exception {
+    @AfterEach
+    public void cleanUp() throws Exception {
         // Clear this property for next test
         System.clearProperty("property.junit.result");
     }
@@ -74,7 +60,6 @@ public class PropertySubstitutionTests {
      * job xml.
      */
     @Test
-    @org.junit.Test
     public void testBatchArtifactPropertyInjection() throws Exception {
         String METHOD = "testBatchArtifactPropertyInjection";
 
@@ -107,7 +92,6 @@ public class PropertySubstitutionTests {
      * job xml even if the Java field is initialized.
      */
     @Test
-    @org.junit.Test
     public void testInitializedPropertyIsOverwritten() throws Exception {
 
         String METHOD = "testInitializedPropertyIsOverwritten";
@@ -140,7 +124,6 @@ public class PropertySubstitutionTests {
      * injecting the property into a batch artifact
      */
     @Test
-    @org.junit.Test
     public void testPropertyWithJobParameter() throws Exception {
 
         String METHOD = "testPropertyWithJobParameter";
@@ -180,7 +163,6 @@ public class PropertySubstitutionTests {
      * value provided through the job xml
      */
     @Test
-    @org.junit.Test
     public void testDefaultPropertyName() throws Exception {
 
         String METHOD = "testDefaultPropertyName";
@@ -212,7 +194,6 @@ public class PropertySubstitutionTests {
      * value provided through the job xml.
      */
     @Test
-    @org.junit.Test
     public void testGivenPropertyName() throws Exception {
 
         String METHOD = "testGivenPropertyName";
@@ -244,7 +225,6 @@ public class PropertySubstitutionTests {
      * Verify that the injected property value is from the artifact level property.
      */
     @Test
-    @org.junit.Test
     public void testPropertyInnerScopePrecedence() throws Exception {
 
         String METHOD = "testPropertyInnerScopePrecedence";
@@ -278,7 +258,6 @@ public class PropertySubstitutionTests {
      * batctlet artifact.
      */
     @Test
-    @org.junit.Test
     public void testPropertyQuestionMarkSimple() throws Exception {
 
         String METHOD = "testPropertyQuestionMarkSimple";
@@ -316,7 +295,6 @@ public class PropertySubstitutionTests {
      * batctlet artifact.
      */
     @Test
-    @org.junit.Test
     public void testPropertyQuestionMarkComplex() throws Exception {
 
         String METHOD = "testPropertyQuestionMarkComplex";
@@ -353,7 +331,6 @@ public class PropertySubstitutionTests {
      * value provided through the job xml.
      */
     @Test
-    @org.junit.Test
     public void testPropertyWithConcatenation() throws Exception {
 
         String METHOD = "testPropertyWithConcatenation";
@@ -394,7 +371,6 @@ public class PropertySubstitutionTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJavaSystemProperty() throws Exception {
 
         String METHOD = "testJavaSystemProperty";

@@ -97,17 +97,20 @@
             <outputDirectory>/doc</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-SE-suite.xml</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-SE-suite-includes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-EE-suite.xml</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-SE-suite-excludes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/testng/filtered.build.xml</source>
-            <outputDirectory>/</outputDirectory>
-            <destName>build.xml</destName>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-includes.txt</source>
+            <outputDirectory>/artifacts</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-excludes.txt</source>
+            <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
             <source>../com.ibm.jbatch.tck/sigtest/sigtest.build.xml</source>
@@ -116,10 +119,6 @@
         </file>
         <file>
             <source>../com.ibm.jbatch.tck/sigtest/batch-tck-sigtest.properties</source>
-            <outputDirectory>/</outputDirectory>
-        </file>
-        <file>
-            <source>../com.ibm.jbatch.tck/testng/batch-tck-testng.properties</source>
             <outputDirectory>/</outputDirectory>
         </file>
     </files>

@@ -39,7 +39,7 @@ import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.JobInstance;
 import jakarta.batch.runtime.StepExecution;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 
 import com.ibm.jbatch.tck.spi.JobExecutionWaiter;
 import com.ibm.jbatch.tck.spi.JobExecutionWaiterFactory;

@@ -32,8 +32,6 @@ sigtest.properties
 test.properties
 
 # Generated Files
-com.ibm.jbatch.tck/testng/filtered.build.xml
 com.ibm.jbatch.tck/generate-sigtest/
-com.ibm.jbatch.tck.exec/testng.suite.xml
 
 

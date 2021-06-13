@@ -41,9 +41,9 @@
     <name>Jakarta Batch Official TCK Distribution ZIP</name>
     <dependencies>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-        </dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>        
         <dependency>
             <groupId>com.beust</groupId>
             <artifactId>jcommander</artifactId>

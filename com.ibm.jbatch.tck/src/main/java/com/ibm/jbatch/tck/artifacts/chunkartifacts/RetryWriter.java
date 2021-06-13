@@ -33,7 +33,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;
 import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;

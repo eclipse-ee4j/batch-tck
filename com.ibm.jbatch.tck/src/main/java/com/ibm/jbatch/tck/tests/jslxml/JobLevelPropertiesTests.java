@@ -19,6 +19,7 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,15 +30,14 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-public class JobLevelPropertiesTests {
+public class JobLevelPropertiesTests extends BaseJUnit5Test {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     private String FOO_VALUE = "bar";
 
@@ -53,7 +53,6 @@ public class JobLevelPropertiesTests {
      * so as not to prevent a runtime from adding some unknown-to-TCK impl-specific properties.
      */
     @Test
-    @org.junit.Test
     public void testJobLevelPropertiesCount() throws Exception {
 
         String METHOD = "testJobLevelPropertiesCount";
@@ -84,7 +83,6 @@ public class JobLevelPropertiesTests {
      * @test_Strategy: set a job property value should equal value set on job context property.
      */
     @Test
-    @org.junit.Test
     public void testJobLevelPropertiesPropertyValue() throws Exception {
 
         String METHOD = "testJobLevelPropertiesPropertyValue";
@@ -113,7 +111,6 @@ public class JobLevelPropertiesTests {
      * @test_Strategy: set a job property value should not be available to step context
      */
     @Test
-    @org.junit.Test
     public void testJobLevelPropertiesShouldNotBeAvailableThroughStepContext() throws Exception {
 
         String METHOD = "testJobLevelPropertiesShouldNotBeAvailableThroughStepContext";
@@ -139,31 +136,14 @@ public class JobLevelPropertiesTests {
         throw e;
     }
 
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
 
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 

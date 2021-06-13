@@ -19,6 +19,7 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.util.Properties;
 
@@ -27,35 +28,17 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.BeforeClass;
-import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class RetryListenerTests {
+public class RetryListenerTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
     }
 
     /*
@@ -66,7 +49,6 @@ public class RetryListenerTests {
      * @test_Strategy: Test that the onRetryReadException listener is invoked when a retryable exception occurs on a read.
      */
     @Test
-    @org.junit.Test
     public void testRetryReadListener() throws Exception {
         String METHOD = "testRetryReadListener";
 
@@ -103,7 +85,6 @@ public class RetryListenerTests {
      * @test_Strategy: Test that the onRetryProcessException listener is invoked when a retryable exception occurs on a process.
      */
     @Test
-    @org.junit.Test
     public void testRetryProcessListener() throws Exception {
         String METHOD = "testRetryProcessListener";
 
@@ -140,7 +121,6 @@ public class RetryListenerTests {
      * @test_Strategy: Test that the onRetryWriteException listener is invoked when a retryable exception occurs on a write.
      */
     @Test
-    @org.junit.Test
     public void testRetryWriteListener() throws Exception {
         String METHOD = "testRetryWriteListener";
 

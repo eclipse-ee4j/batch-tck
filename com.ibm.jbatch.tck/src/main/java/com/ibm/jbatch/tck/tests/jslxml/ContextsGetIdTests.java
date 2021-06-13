@@ -20,22 +20,21 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 
-import java.util.Properties;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class ContextsGetIdTests {
+public class ContextsGetIdTests extends BaseJUnit5Test {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /**
      * @throws Exception
@@ -53,7 +52,6 @@ public class ContextsGetIdTests {
      * </job>
      */
     @Test
-    @org.junit.Test
     public void testJobContextGetId() throws Exception {
 
         String METHOD = "testJobContextGetId";
@@ -90,7 +88,6 @@ public class ContextsGetIdTests {
      * </job>
      */
     @Test
-    @org.junit.Test
     public void testStepContextGetId() throws Exception {
 
         String METHOD = "testStepContextGetId";
@@ -117,30 +114,14 @@ public class ContextsGetIdTests {
         throw e;
     }
 
-    public void setup(String[] args, Properties props) throws Exception {
 
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

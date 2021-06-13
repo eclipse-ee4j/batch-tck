@@ -20,6 +20,7 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.util.List;
 import java.util.Properties;
@@ -31,32 +32,17 @@ import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.BeforeClass;
-import org.testng.Reporter;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class ContextAndListenerTests {
+public class ContextAndListenerTests extends BaseJUnit5Test {
 
     private final static Logger logger = Logger.getLogger(ContextAndListenerTests.class.getName());
     private static JobOperatorBridge jobOp = null;
 
-
-    public static void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
@@ -66,7 +52,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testExamineJobContextInArtifact() throws Exception {
 
         String METHOD = "testExamineJobContextInArtifact()";
@@ -102,7 +87,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testExamineStepContextInArtifact() throws Exception {
 
         String METHOD = "testExamineStepContextInArtifact()";
@@ -142,7 +126,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testOneArtifactIsJobAndStepListener() throws Exception {
 
         String METHOD = "testOneArtifactIsJobAndStepListener";
@@ -180,7 +163,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testgetException() throws Exception {
 
         String METHOD = "testgetException";
@@ -214,7 +196,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testgetExceptionListenerBased() throws Exception {
 
         String METHOD = "testgetExceptionListenerBased";
@@ -250,7 +231,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testJobContextIsUniqueForMainThreadAndPartitions() throws Exception {
 
         String METHOD = "testJobContextIsUniqueForMainThreadAndPartitions";
@@ -279,7 +259,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testJobContextIsUniqueForMainThreadAndFlowsInSplits() throws Exception {
 
         String METHOD = "testJobContextIsUniqueForMainThreadAndFlowsInSplits";
@@ -308,7 +287,6 @@ public class ContextAndListenerTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testStepContextIsUniqueForMainThreadAndPartitions() throws Exception {
         String METHOD = "testStepContextIsUniqueForMainThreadAndPartitions";
         begin(METHOD);
@@ -334,10 +312,6 @@ public class ContextAndListenerTests {
         } catch (Exception e) {
             handleException(METHOD, e);
         }
-    }
-
-    @AfterClass
-    public static void cleanup() throws Exception {
     }
 
     private static void handleException(String methodName, Exception e) throws Exception {

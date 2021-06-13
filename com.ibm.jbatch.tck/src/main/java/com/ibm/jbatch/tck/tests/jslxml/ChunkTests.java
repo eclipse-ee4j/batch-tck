@@ -37,38 +37,22 @@ import com.ibm.jbatch.tck.artifacts.specialized.MyMultipleExceptionsRetryReadLis
 import com.ibm.jbatch.tck.artifacts.specialized.MySkipProcessListener;
 import com.ibm.jbatch.tck.artifacts.specialized.MySkipReadListener;
 import com.ibm.jbatch.tck.artifacts.specialized.MySkipWriteListener;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-public class ChunkTests {
+public class ChunkTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
     }
 
     /*
@@ -85,7 +69,6 @@ public class ChunkTests {
      *                 job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkNoProcessorDefined() throws Exception {
         String METHOD = "testChunkDefaultItemCount";
 
@@ -128,7 +111,6 @@ public class ChunkTests {
      *                 job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkNullCheckpointInfo() throws Exception {
         String METHOD = "testChunkDefaultItemCount";
 
@@ -164,7 +146,6 @@ public class ChunkTests {
      *                 the before/after lifecycle of each listener is contained in the  exit status.
      */
     @Test
-    @org.junit.Test
     public void testChunkArtifactInstanceUniqueness() throws Exception {
         String METHOD = "testChunkDefaultItemCount";
 
@@ -200,7 +181,6 @@ public class ChunkTests {
      * 		during the read-write-process batch loop
      */
     @Test
-    @org.junit.Test
     public void testChunkOnErrorListener() throws Exception {
 
         String METHOD = "testChunkOnErrorListener";
@@ -246,7 +226,6 @@ public class ChunkTests {
      *                 test that the processing begins at last recorded check point (item 7) prior to previous failure
      */
     @Test
-    @org.junit.Test
     public void testChunkRestartItemCount7() throws Exception {
         String METHOD = "testChunkRestartItemCount7";
 
@@ -318,7 +297,6 @@ public class ChunkTests {
      *                 test that the processing begins at last recorded check point (item 10) prior to previous failure
      */
     @Test
-    @org.junit.Test
     public void testChunkRestartItemCount10() throws Exception {
 
         String METHOD = "testChunkRestartItemCount10";
@@ -390,7 +368,6 @@ public class ChunkTests {
      *                 test that the processing begins at last recorded check point (item 10) prior to previous failure
      */
     @Test
-    @org.junit.Test
     public void testChunkRestartChunk5() throws Exception {
 
         String METHOD = "testChunkRestartChunk5";
@@ -461,7 +438,6 @@ public class ChunkTests {
      *                 job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkDefaultItemCount() throws Exception {
         String METHOD = "testChunkDefaultItemCount";
 
@@ -507,7 +483,6 @@ public class ChunkTests {
      *                  test that the job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkRestartCustomCheckpoint() throws Exception {
         String METHOD = "testChunkRestartCustomCheckpoint";
 
@@ -579,7 +554,6 @@ public class ChunkTests {
      *                  test that the job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkTimeBasedDefaultCheckpoint() throws Exception {
         String METHOD = "testChunkTimeBasedDefaultCheckpoint";
 
@@ -624,7 +598,6 @@ public class ChunkTests {
      *                  test that the job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkTimeBasedTimeLimit0() throws Exception {
         String METHOD = "testChunkTimeBasedDefaultCheckpoint";
 
@@ -673,7 +646,6 @@ public class ChunkTests {
      *                  test that the job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkTimeBased10Seconds() throws Exception {
 
         String METHOD = "testChunkTimeBased10Seconds";
@@ -716,7 +688,6 @@ public class ChunkTests {
      *                  test that the job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkRestartTimeBasedCheckpoint() throws Exception {
         String METHOD = "testChunkRestartTimeBasedCheckpoint";
 
@@ -782,7 +753,6 @@ public class ChunkTests {
      *                  test that the job completes successfully.
      */
     @Test
-    @org.junit.Test
     public void testChunkRestartTimeBasedDefaultCheckpoint() throws Exception {
 
         String METHOD = "testChunkRestartTimeBasedDefaultCheckpoint";
@@ -852,9 +822,8 @@ public class ChunkTests {
      *                  test that the job completes fails and that the application recognized the skippable exception
      *                  that extends the unskippable is not treated as skippable.
      */
-    @org.junit.Test
-    @Test(enabled = false) // Disabling per Bug 5403
-    @Ignore("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
+    @Test
+    @Disabled("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
     public void testChunkSkipMultipleExceptions() throws Exception {
 
         String METHOD = "testChunkSkipRead";
@@ -898,7 +867,6 @@ public class ChunkTests {
      *                  test that the job completes successfully and that the application recognized the exceptions as skippable
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipRead() throws Exception {
 
         String METHOD = "testChunkSkipRead";
@@ -943,7 +911,6 @@ public class ChunkTests {
      *                  and that the item was passed to the skip listener.
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipProcess() throws Exception {
         String METHOD = "testChunkSkipProcess";
         try {
@@ -986,7 +953,6 @@ public class ChunkTests {
      *                  and that the item was passed to the skip listener.
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipWrite() throws Exception {
         String METHOD = "testChunkSkipWrite";
         try {
@@ -1030,7 +996,6 @@ public class ChunkTests {
      *                  test that the job completes successfully and that the application recognized the exceptions as skippable
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipOnError() throws Exception {
 
         String METHOD = "testChunkSkipOnError";
@@ -1112,7 +1077,6 @@ public class ChunkTests {
      *                  test that the job completes successfully and that the listener's onError method is called by the runtime.
      */
     @Test
-    @org.junit.Test
     public void testChunkRetryOnError() throws Exception {
 
         String METHOD = "testChunkRetryOnError";
@@ -1194,7 +1158,6 @@ public class ChunkTests {
      *                  test that the job fails but the skip-limit was recognized.
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipReadExceedSkip() throws Exception {
         String METHOD = "testChunkSkipReadExceedSkip";
 
@@ -1239,7 +1202,6 @@ public class ChunkTests {
      *                  test that the job fails but the skip-limit was recognized.
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipProcessExceedSkip() throws Exception {
 
         String METHOD = "testChunkSkipProcessExceedSkip";
@@ -1285,7 +1247,6 @@ public class ChunkTests {
      *                  test that the job fails but the skip-limit was recognized.
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipWriteExceedSkip() throws Exception {
         String METHOD = "testChunkSkipWriteExceedSkip";
 
@@ -1331,7 +1292,6 @@ public class ChunkTests {
      *                  test that the job fails but the final exception was non skippable was recognized.
      */
     @Test
-    @org.junit.Test
     public void testChunkSkipReadNoSkipChildEx() throws Exception {
         String METHOD = "testChunkSkipReadNoSkipChildEx";
 
@@ -1376,7 +1336,6 @@ public class ChunkTests {
      *                  test that the job succeeds.
      */
     @Test
-    @org.junit.Test
     public void testChunkRetryRead() throws Exception {
         String METHOD = "testChunkRetryRead";
 
@@ -1421,9 +1380,8 @@ public class ChunkTests {
      *                  as unretryable itself.
      *                  test that the job completes fails and that the application recognized the retryable exception that extends the unretryable is not treated as retryable.
      */
-    @org.junit.Test
-    @Test(enabled = false) // Disabling per Bug 5403
-    @Ignore("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
+    @Test
+    @Disabled("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
     public void testChunkRetryMultipleExceptions() throws Exception {
 
         String METHOD = "testChunkRetryMultipleExceptions";
@@ -1471,7 +1429,6 @@ public class ChunkTests {
      *                  test that each job succeeds and that the appropriate listener was called.
      */
     @Test
-    @org.junit.Test
     public void testChunkItemListeners() throws Exception {
         String METHOD = "testChunkItemListeners";
 
@@ -1566,7 +1523,6 @@ public class ChunkTests {
      *                  The Batch Artifact enforces that each listener (read, process and write) onError() methods are been called correctly by the runtime.
      */
     @Test
-    @org.junit.Test
     public void testChunkItemListenersOnError() throws Exception {
         String METHOD = "testChunkItemListeners";
 
@@ -1633,7 +1589,6 @@ public class ChunkTests {
      *                 Verify that persisted step data is available even if step did not complete.
      */
     @Test
-    @org.junit.Test
     public void testUserDataIsPersistedAfterCheckpoint() throws Exception {
 
         String METHOD = "testChunkRestartItemCount10";

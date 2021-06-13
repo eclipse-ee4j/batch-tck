@@ -175,13 +175,14 @@
         <version.jakarta.xml.bind.jakarta.xml.bind-api>3.0.0</version.jakarta.xml.bind.jakarta.xml.bind-api>
         <version.org.glassfish.jaxb.jaxb-runtime>3.0.0</version.org.glassfish.jaxb.jaxb-runtime>
 
-        <version.org.testng.testng>6.8.8</version.org.testng.testng>
+        <version.org.junit.jupiter>5.6.1</version.org.junit.jupiter>
+        <version.org.junit.platform>1.7.2</version.org.junit.platform>
         <version.com.beust.jcommander>1.60</version.com.beust.jcommander>
         <version.org.sonatype.plugins.nexus-staging-maven-plugin>1.6.6</version.org.sonatype.plugins.nexus-staging-maven-plugin>
         <version.com.mycila.maven-license-plugin.maven-license-plugin>1.10.b1</version.com.mycila.maven-license-plugin.maven-license-plugin>
         <version.org.apache.maven.plugins.maven-antrun-plugin>1.8</version.org.apache.maven.plugins.maven-antrun-plugin>
         <version.org.apache.maven.plugins.maven-compiler-plugin>2.0.2</version.org.apache.maven.plugins.maven-compiler-plugin>
-        <version.org.apache.maven.plugins.maven-failsafe-plugin>2.18</version.org.apache.maven.plugins.maven-failsafe-plugin>
+        <version.org.apache.maven.plugins.maven-failsafe-plugin>2.22.2</version.org.apache.maven.plugins.maven-failsafe-plugin>
         <version.org.apache.maven.plugins.maven-gpg-plugin>1.4</version.org.apache.maven.plugins.maven-gpg-plugin>
         <version.org.apache.maven.plugins.maven-jar-plugin>2.4</version.org.apache.maven.plugins.maven-jar-plugin>
         <version.org.apache.maven.plugins.maven-javadoc-plugin>2.9.1</version.org.apache.maven.plugins.maven-javadoc-plugin>
@@ -202,6 +203,7 @@
         <module>com.ibm.jbatch.tck.dist.exec</module>
         <module>com.ibm.jbatch.tck.ann</module>
         <module>com.ibm.jbatch.tck.ann.proc</module>
+        <module>jakarta.batch.reporting</module>
     </modules>
 
     <dependencyManagement>
@@ -286,9 +288,19 @@
                 <version>${version.jakarta.inject.jakarta.inject-api}</version>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.13.1</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${version.org.junit.jupiter}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-reporting</artifactId>
+                <version>${version.org.junit.platform}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-commons</artifactId>
+                <version>${version.org.junit.platform}</version>
             </dependency>
             <dependency>
                 <groupId>net.java.sigtest</groupId>
@@ -309,11 +321,6 @@
                 <groupId>org.jboss.weld.se</groupId>
                 <artifactId>weld-se-core</artifactId>
                 <version>${version.org.jboss.weld.se.weld-se-core}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>${version.org.testng.testng}</version>
             </dependency>
             <dependency>
                 <groupId>com.beust</groupId>
@@ -471,8 +478,6 @@
                         <exclude>**/*.ddl</exclude>
                         <exclude>**/batch-tck-*.properties</exclude>
                         <exclude>**/batch-tck-impl-*.xml</exclude>
-                        <exclude>**/testng-class.xml</exclude>
-                        <exclude>**/testng-method.xml</exclude>
                         <exclude>**/beans.xml</exclude>
                     </excludes>
                     <includes>

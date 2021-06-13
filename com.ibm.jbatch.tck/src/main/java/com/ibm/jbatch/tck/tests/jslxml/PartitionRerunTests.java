@@ -27,16 +27,16 @@ import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
-import org.junit.Before;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import com.ibm.jbatch.tck.utils.Reporter;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.ann.*;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class PartitionRerunTests {
+public class PartitionRerunTests extends BaseJUnit5Test {
     static JobOperatorBridge jobOp = null;
 
     private static void handleException(String methodName, Exception e) throws Exception {
@@ -45,30 +45,13 @@ public class PartitionRerunTests {
         throw e;
     }
 
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-        jobOp = null;
-    }
-
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 
@@ -97,7 +80,6 @@ public class PartitionRerunTests {
             notes = {"The spec doesn't explicitly describe this combination of partitions plus allow-start-if-complete=\"true\", but it seems the only valid interpretation."}
     )
     @Test
-    @org.junit.Test
     public void testRerunPartitionAndBatchlet() throws Exception {
         Properties origParams = new Properties();
         origParams.setProperty("force.failure", "true");
