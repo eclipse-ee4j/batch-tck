@@ -192,6 +192,9 @@
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
         <version.net.java.sigtest.sigtestdev>3.0-b12-v20140219</version.net.java.sigtest.sigtestdev>
         <version.org.jboss.weld.se.weld-se-core>4.0.0.Alpha1</version.org.jboss.weld.se.weld-se-core>
+        
+        <!-- signature test -->
+        <sigtestjar>Leave default to use the default sigtestdev.jar from Maven Central or set this to the path to your own sigtestdev.jar</sigtestjar>
     </properties>
 
     <modules>

@@ -119,7 +119,7 @@
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/testng/batch-tck-testng.properties</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-testng.properties</source>
             <outputDirectory>/</outputDirectory>
         </file>
     </files>
