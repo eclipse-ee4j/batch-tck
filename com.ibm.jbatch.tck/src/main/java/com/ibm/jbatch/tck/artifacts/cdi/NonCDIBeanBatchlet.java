@@ -18,29 +18,13 @@
 */
 package com.ibm.jbatch.tck.artifacts.cdi;
 
-import jakarta.batch.api.BatchProperty;
+import com.ibm.jbatch.tck.cdi.NamedTestBean;
 import jakarta.batch.api.Batchlet;
 import jakarta.batch.runtime.context.JobContext;
 import jakarta.batch.runtime.context.StepContext;
 import jakarta.enterprise.inject.spi.CDI;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 public class NonCDIBeanBatchlet implements Batchlet {
-
-    private class BatchPropertyLiteral extends AnnotationLiteral<BatchProperty> implements BatchProperty {
-
-        private String name;
-
-        BatchPropertyLiteral(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String name() {
-            return name;
-        }
-    }
-
 
     @Override
     public String process() throws Exception {
@@ -48,11 +32,9 @@ public class NonCDIBeanBatchlet implements Batchlet {
         
         JobContext jobCtx = cdi.select(JobContext.class).get();
         StepContext stepCtx = cdi.select(StepContext.class).get();
-        String prop1Val =  cdi.select(String.class, new BatchPropertyLiteral("prop1")).get();
-        String prop2Val =  cdi.select(String.class, new BatchPropertyLiteral("prop2")).get();
+        NamedTestBean bean =  cdi.select(NamedTestBean.class).get();
 
-
-        appendExitStatus(jobCtx, jobCtx.getExecutionId() + ":" + stepCtx.getStepName() + ":" + prop1Val + ":" + prop2Val);
+        appendExitStatus(jobCtx, jobCtx.getExecutionId() + ":" + stepCtx.getStepName() + ":" + bean.getProp1() + ":" + bean.getProp2());
 
         return "OK";
     }
